@@ -1,2 +1,7 @@
 theme: jekyll-theme-architect
 show_downloads: "true"
+github:
+  3d_url: https://github.com/eva-social-robot/3dmodels/archive/refs/heads/main.zip
+  core_url: https://github.com/amitjans/Eva/archive/refs/heads/master.zip
+  eyes_url: https://github.com/amitjans/eva-app/archive/refs/heads/master.zip
+  neck_url: https://github.com/amitjans/AXSimpleTest/archive/refs/heads/master.zip
