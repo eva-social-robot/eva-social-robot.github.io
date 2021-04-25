@@ -1,9 +1,7 @@
-## Welcome to GitHub Pages
+## Eva
 
-You can use the [editor on GitHub](https://github.com/eva-social-robot/hello/edit/main/README.md) to maintain and preview the content for your website in Markdown files.
-
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
-
+ Eva is an open-sorce social robot which includes features such as natural language processing and basic synthesis of emotions, and speech.
+ 
 ### Markdown
 
 Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
