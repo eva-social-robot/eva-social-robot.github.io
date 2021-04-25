@@ -23,7 +23,7 @@
       height: 10%;
     }
 
-    #sidebar a.button {
+    #sidebar a.view {
       position: absolute;
       top: 0;
       right: 0;
@@ -43,7 +43,8 @@
     <div class="inner">
       <a href="{{ '/' | absolute_url }}">
         <!-- <h1>{{ site.title | default: site.github.repository_name }}</h1> -->
-        <img src="/hello/img/eva.png" alt="">
+        <h1><img src="/hello/img/eva.png" alt=""> Eva</h1>
+        
       </a>
       <h2>{{ site.description | default: site.github.project_tagline }}</h2>
       {% if site.github.is_project_page %}
@@ -64,7 +65,7 @@
       <aside id="sidebar">
         {% if site.show_downloads %}
         <h2>3D Models</h2>
-        <a href="{{ site.github.3d_view }}" class="button">
+        <a href="{{ site.github.3d_view }}" class="button view">
           <small>View proyect on</small>
           Github
         </a>
@@ -73,7 +74,7 @@
           .zip file
         </a>
         <h2>Core-app</h2>
-        <a href="{{ site.github.core_view }}" class="button">
+        <a href="{{ site.github.core_view }}" class="button view">
           <small>View proyect on</small>
           Github
         </a>
@@ -86,7 +87,7 @@
           <small>Download {{ site.github.eyes_app_v }}</small>
           .AppImage file
         </a>
-        <a href="{{ site.github.eyes_code_view }}" class="button">
+        <a href="{{ site.github.eyes_code_view }}" class="button view">
           <small>View proyect on</small>
           Github
         </a>
@@ -95,7 +96,7 @@
           .zip file
         </a>
         <h2>Neck-app</h2>
-        <a href="{{ site.github.neck_view }}" class="button">
+        <a href="{{ site.github.neck_view }}" class="button view">
           <small>View proyect on</small>
           Github
         </a>
