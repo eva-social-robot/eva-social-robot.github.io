@@ -3,5 +3,7 @@ show_downloads: "true"
 github:
   3d_url: https://github.com/eva-social-robot/3dmodels/archive/refs/heads/main.zip
   core_url: https://github.com/amitjans/Eva/archive/refs/heads/master.zip
-  eyes_url: https://github.com/amitjans/eva-app/archive/refs/heads/master.zip
+  eyes_app_v: 1.0-rc
+  eyes_app_url: https://github.com/amitjans/eva-app/releases/download/v1.0-rc/Eva-1.0.0-armv7l.AppImage
+  eyes_code_url: https://github.com/amitjans/eva-app/archive/refs/heads/master.zip
   neck_url: https://github.com/amitjans/AXSimpleTest/archive/refs/heads/master.zip

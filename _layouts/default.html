@@ -19,7 +19,7 @@
       <div class="inner">
         <a href="{{ '/' | absolute_url }}">
           <!-- <h1>{{ site.title | default: site.github.repository_name }}</h1> -->
-          <img src="../img/eva.png" alt="">
+          <img src="/hello/img/eva.png" alt="">
         </a>
         <h2>{{ site.description | default: site.github.project_tagline }}</h2>
         {% if site.github.is_project_page %}
@@ -39,21 +39,30 @@
 
         <aside id="sidebar">
           {% if site.show_downloads %}
-            <h1>3D Models</h1>
+            <h2>3D Models</h2>
             <a href="{{ site.github.3d_url }}" class="button">
               <small>Download</small>
               .zip file
             </a>
-            <h1>Core-app</h1>
+            <h2>Core-app</h2>
             <a href="{{ site.github.core_url }}" class="button">
               <small>Download</small>
               .zip file
             </a>
-            <h1>Eyes-app</h1>
-            <a href="{{ site.github.eyes_url }}" class="button">
+            <h2>Eyes-app</h2>
+            <a href="{{ site.github.eyes_app_url }}" class="button">
+              <small>Download {{ eyes_app_v }}</small>
+              .AppImage file
+            </a>
+            <a href="{{ site.github.eyes_code_url }}" class="button">
               <small>Download</small>
               .zip file
             </a>
+            <a href="{{ site.github.neck_url }}" class="button">
+              <small>Download</small>
+              .zip file
+            </a>
+            <h2>Neck-app</h2>
             <a href="{{ site.github.neck_url }}" class="button">
               <small>Download</small>
               .zip file
