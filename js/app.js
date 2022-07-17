@@ -37,6 +37,10 @@ eva
           templateUrl: "/plantillas/controlAngular.html",
           activetab: "controlAngular"
         })
+        .when("/login", {
+          templateUrl: "/plantillas/login.html",
+          activetab: "login"
+        })
         .when("/interaccion", {
           templateUrl: "/plantillas/interaccion.html",
           activetab: "interaccion"
@@ -57,10 +61,10 @@ eva
           templateUrl: "/plantillas/scriptdata.html",
           activetab: "script"
         })
-        // .when("/scriptdata/:id", {
-        //   templateUrl: "/plantillas/scriptdata.html",
-        //   activetab: "script"
-        // })
+        .when("/scriptdata/:id", {
+          templateUrl: "/plantillas/scriptdata.html",
+          activetab: "script"
+        })
         .when("/voice", {
           templateUrl: "/plantillas/voice.html",
           activetab: "lang"
@@ -77,10 +81,10 @@ eva
           templateUrl: "/plantillas/mov.html",
           activetab: "mov"
         })
-        // .when("/images", {
-        //   templateUrl: "/plantillas/images.html",
-        //   activetab: "images"
-        // })
+        .when("/images", {
+          templateUrl: "/plantillas/images.html",
+          activetab: "images"
+        })
         .otherwise("/controlAngular");
     },
   ])

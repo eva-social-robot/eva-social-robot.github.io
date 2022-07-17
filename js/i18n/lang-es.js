@@ -30,7 +30,7 @@ const es = {
         JA: "Japonés"
     },
     DATATABLE: {
-        SHOW: "Mostra",
+        SHOW: "Mostrar",
         SEARCH: "Buscar",
         SHOWING: "Mostrando",
         TO: "a",

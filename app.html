@@ -3,79 +3,91 @@
 <head>
     <title>Eva</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/font-awesome/css/font-awesome.min.css">
+    <meta name="referrer" anycodings_javascript content="strict-origin-when-cross-origin">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" type="text/css" href="css/dropzone.min.css">
     <link rel="stylesheet" type="text/css" href="css/jquery.dataTables.min.css">
     <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="css/login.css">
 </head>
 
 <body ng-app="evaApp">
-    <nav class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <!-- <div class="navbar-header">
-                <a class="navbar-brand" href="/#!/controlAngular">{{'TOOLBAR.NAME' | translate}}</a>
-            </div> -->
-            <div id="navbar" class="collapse navbar-collapse">
-                <ul class="nav navbar-nav">
-                    <li ng-class="{'active': $route.current.activetab == 'controlAngular'}"><a href="/app.html#!/controlAngular">{{'TOOLBAR.INI' | translate}}</a></li>
-                    <li ng-class="{'active': $route.current.activetab == 'interaccion'}"><a href="/app.html#!/interaccion">{{'TOOLBAR.INTERACTION' | translate}}</a></li>
-                    <li class="dropdown" ng-class="{'active': $route.current.activetab == 'script'}">
-                        <a id="drop2" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                            aria-expanded="false" target="_blank">{{'TOOLBAR.SCRIPT' | translate}}<span class="caret"></span>
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="drop2">
-                            <li><a href="/app.html#!/script">{{'TOOLBAR.SCRIPTS' | translate}}</a></li>
-                            <li><a href="/app.html#!/scriptdata">{{'TOOLBAR.DATA' | translate}}</a></li>
-                        </ul>
-                    </li>
-                    <li ng-class="{'active': $route.current.activetab == 'audio'}"><a href="/app.html#!/audio">{{'TOOLBAR.AUDIOS' | translate}}</a></li>
-                    <!-- <li ng-class="{'active': $route.current.activetab == 'images'}"><a href="/app.html#!/images">{{'TOOLBAR.IMGS' | translate}}</a></li> -->
-                    <li class="dropdown" ng-class="{'active': $route.current.activetab == 'lang'}">
-                        <a id="drop2" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                            aria-expanded="false" target="_blank">
-                            {{'TOOLBAR.LANGUAGE' | translate}}
-                            <span class="caret"></span>
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="drop2">
-                            <li><a href="/app.html#!/voice">{{'TOOLBAR.VOICE' | translate}} (IBM Watson)</a></li>
-                            <li role="separator" class="divider"></li>
-                            <!-- <li><a href="#">Separated link</a></li> -->
-                            <li><a href="/app.html#!/listen">{{'TOOLBAR.LISTEN' | translate}} (Google y Watson)</a></li>
-                            
-                        </ul>
-                    </li>
-                    <li class="dropdown" ng-class="{'active': $route.current.activetab == 'led'}">
-                        <a id="drop2" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                            aria-expanded="false" target="_blank">{{'TOOLBAR.LED' | translate}}<span class="caret"></span>
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="drop2">
-                            <li><a href="/app.html#!/ledsanim">{{'TOOLBAR.LEDS_ANIMATIONS' | translate}}</a></li>
-                            <li><a href="/app.html#!/led">{{'TOOLBAR.LEDS_ANIMATIONS_DATA' | translate}}</a></li>
-                        </ul>
-                    </li>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <!-- <a class="navbar-brand" href="#">Navbar</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button> -->
+      
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item" ng-class="{'active': $route.current.activetab == 'controlAngular'}">
+                    <a class="nav-link" href="/app.html#!/controlAngular">{{'TOOLBAR.INI' | translate}}</a>
+                </li>
+                <li class="nav-item" ng-class="{'active': $route.current.activetab == 'interaccion'}">
+                    <a class="nav-link" href="/app.html#!/interaccion">{{'TOOLBAR.INTERACTION' | translate}}</a>
+                </li>
 
-                    <li ng-class="{'active': $route.current.activetab == 'mov'}"><a href="/app.html#!/mov">{{'TOOLBAR.MOVEMENT' | translate}}</a></li>
-                    <li class="dropdown">
-                        <a id="drop2" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                            aria-expanded="false" target="_blank">
-                            {{'LANG.MENU' | translate}}
-                            <span class="caret"></span>
-                        </a>
-                        <ul class="dropdown-menu" ng-controller="lang" aria-labelledby="drop2">
-                            <li><a ng-click="changeLanguage('es')" onmouseover="this.style.cursor='pointer';">&#127466&#127480 {{'LANG.ES' | translate}}</a></li>
-                            <li><a ng-click="changeLanguage('en')" onmouseover="this.style.cursor='pointer';">&#127482&#127480 {{'LANG.EN' | translate}}</a></li>
-                            <li><a ng-click="changeLanguage('pt')" onmouseover="this.style.cursor='pointer';">&#127463&#127479 {{'LANG.PT' | translate}}</a></li>
-                            <li><a ng-click="changeLanguage('fr')" onmouseover="this.style.cursor='pointer';">&#127467&#127479 {{'LANG.FR' | translate}}</a></li>
-                            <li><a ng-click="changeLanguage('it')" onmouseover="this.style.cursor='pointer';">&#127470&#127481 {{'LANG.IT' | translate}}</a></li>
-                            <li><a ng-click="changeLanguage('ja')" onmouseover="this.style.cursor='pointer';">&#127471&#127477 {{'LANG.JA' | translate}}</a></li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-            <!--/.nav-collapse -->
+                <li class="nav-item dropdown" ng-class="{'active': $route.current.activetab == 'script'}">
+                    <a id="drop2" href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                        aria-expanded="false" target="_blank">{{'TOOLBAR.SCRIPT' | translate}}<span class="caret"></span>
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="/app.html#!/script">{{'TOOLBAR.SCRIPTS' | translate}}</a>
+                        <!-- <div class="dropdown-divider"></div> -->
+                        <a class="dropdown-item" href="/app.html#!/scriptdata">{{'TOOLBAR.DATA' | translate}}</a>
+                    </div>
+                </li>
+                <li class="nav-item" ng-class="{'active': $route.current.activetab == 'audio'}">
+                    <a class="nav-link" href="/app.html#!/audio">{{'TOOLBAR.AUDIOS' | translate}}</a>
+                </li>
+                <li class="nav-item" ng-class="{'active': $route.current.activetab == 'images'}">
+                    <a class="nav-link" href="/app.html#!/images">{{'TOOLBAR.IMGS' | translate}}</a>
+                </li>
+                <li class="nav-item dropdown" ng-class="{'active': $route.current.activetab == 'lang'}">
+                    <a id="drop2" href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                        aria-expanded="false" target="_blank">
+                        {{'TOOLBAR.LANGUAGE' | translate}}
+                        <span class="caret"></span>
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="/app.html#!/voice">{{'TOOLBAR.VOICE' | translate}} (IBM Watson)</a>
+                        <a class="dropdown-item" href="/app.html#!/listen">{{'TOOLBAR.LISTEN' | translate}} (Google y Watson)</a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown" ng-class="{'active': $route.current.activetab == 'led'}">
+                    <a id="drop2" href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                        aria-expanded="false" target="_blank">{{'TOOLBAR.LED' | translate}}<span class="caret"></span>
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="/app.html#!/ledsanim">{{'TOOLBAR.LEDS_ANIMATIONS' | translate}}</a>
+                        <a class="dropdown-item" href="/app.html#!/led">{{'TOOLBAR.LEDS_ANIMATIONS_DATA' | translate}}</a>
+                    </div>
+                </li>
+
+                <li class="nav-item" ng-class="{'active': $route.current.activetab == 'mov'}">
+                    <a class="nav-link" href="/app.html#!/mov">{{'TOOLBAR.MOVEMENT' | translate}}</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link" id="drop2" href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                        aria-expanded="false" target="_blank">
+                        {{'LANG.MENU' | translate}}
+                        <span class="caret"></span>
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" ng-click="changeLanguage('es')" onmouseover="this.style.cursor='pointer';">&#127466&#127480 {{'LANG.ES' | translate}}</a>
+                        <a class="dropdown-item" ng-click="changeLanguage('en')" onmouseover="this.style.cursor='pointer';">&#127482&#127480 {{'LANG.EN' | translate}}</a>
+                        <a class="dropdown-item" ng-click="changeLanguage('pt')" onmouseover="this.style.cursor='pointer';">&#127463&#127479 {{'LANG.PT' | translate}}</a>
+                        <a class="dropdown-item" ng-click="changeLanguage('fr')" onmouseover="this.style.cursor='pointer';">&#127467&#127479 {{'LANG.FR' | translate}}</a>
+                        <a class="dropdown-item" ng-click="changeLanguage('it')" onmouseover="this.style.cursor='pointer';">&#127470&#127481 {{'LANG.IT' | translate}}</a>
+                        <a class="dropdown-item" ng-click="changeLanguage('ja')" onmouseover="this.style.cursor='pointer';">&#127471&#127477 {{'LANG.JA' | translate}}</a>
+                    </div>
+                </li>
+
+            </ul>
+            <a class="btn btn-outline-success my-2 my-sm-0" href="/app.html#!/login"><span class="fa fa-sign-in"></span> Login</a>
         </div>
-    </nav>
+      </nav>
 
     <section id="content" ng-view>
       
@@ -89,15 +101,17 @@
     <script>
         var URL = "https://eva-repository.herokuapp.com";
     </script>
-    <script src="js/jquery-1.11.3.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>    
 
     <script src="js/angular/angular.min.js"></script>
     <script src="js/angular/angular-route.min.js"></script>
     <script src="js/angular/angular-sanitize.min.js"></script>
     <script src="js/angular/angular-translate.min.js"></script>
     <script src="js/angular/angular-translate-loader-static-files.min.js"></script>
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/satellizer/0.14.1/satellizer.min.js" integrity="sha512-ZLAGfaREnf5hq51URaG84dBY6DhCVOxxwvhMEsPPRj5qTbN9NU2cp4hyaWzc9a0k1UrsLYWU5vbVPvme0d/n6A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     
-    <script src="js/bootstrap.min.js"></script>
     <script src="js/bootstrap-notify.min.js"></script>
     <script src="js/notify.min.js"></script>
     <script src="js/datatable.min.js"></script>
@@ -117,7 +131,7 @@
     <script type="text/javascript" src="js/controllers/controlAngular.js"></script>
     <script type="text/javascript" src="js/controllers/ledsanim.js"></script>
     <script type="text/javascript" src="js/controllers/audio.js"></script>
-    <!-- <script type="text/javascript" src="js/controllers/images.js"></script> -->
+    <script type="text/javascript" src="js/controllers/images.js"></script>
     <script type="text/javascript" src="js/controllers/interaccion.js"></script>
     <script type="text/javascript" src="js/controllers/led.js"></script>
     <script type="text/javascript" src="js/controllers/listen.js"></script>
@@ -125,8 +139,9 @@
     <script type="text/javascript" src="js/controllers/script.js"></script>
     <script type="text/javascript" src="js/controllers/scriptdata.js"></script>
     <script type="text/javascript" src="js/controllers/voice.js"></script>
+    <script type="text/javascript" src="js/controllers/login.js"></script>
 
-    <script type="text/javascript" src="js/blockly/blockly.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/blockly/8.0.3/blockly.min.js" integrity="sha512-NCmRVwmZmhsf0W8ZQF6wo+JjqD8WOyZO21mSDf873SGWzxcFpn7IhSgxyLYkKfI3QTQzoTGe6SaQz2B6Wkvt1Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script type="text/javascript" src="js/blockly/dialogflow.js"></script>
     <script type="text/javascript" src="js/blockly/emotions.js"></script>
     <script type="text/javascript" src="js/blockly/int.js"></script>
@@ -139,6 +154,7 @@
     <script type="text/javascript" src="js/blockly/speak.js"></script>
     <script type="text/javascript" src="js/blockly/voice.js"></script>
     <script type="text/javascript" src="js/blockly/wait.js"></script>
+    <script type="text/javascript" src="js/blockly/image.js"></script>
     <script type="text/javascript" src="js/blockly/image.js"></script>
 
     <script type="text/javascript" src="js/xml2json.js"></script>
