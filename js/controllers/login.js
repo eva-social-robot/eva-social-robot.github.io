@@ -10,6 +10,7 @@ eva.controller("login", ['$scope', '$http', function ($scope, $http) {
                 sessionStorage.setItem('oauth_token', `Bearer ${response.data.value}`);
                 $http.defaults.headers.common['Authorization'] = sessionStorage.getItem('oauth_token')
               }, function errorCallback(response) {
+                console.log(response);
               }
               );
             }
