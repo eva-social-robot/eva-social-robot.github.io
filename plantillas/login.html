@@ -4,35 +4,15 @@
       <div class="card card-signin my-5">
         <div class="card-body">
           <h5 class="card-title text-center">Sign In</h5>
-          <form class="form-signin">
-            <button ng-click="authenticate()" type="button"
-              class="btn btn-lg btn-google btn-block text-uppercase">
-              <i class="fa-brands fa-google"></i>
-              Sign in with Google
-            </button>
-
+          <div class="form-signin">
             <div class="form-group">
-              <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+              <input type="email" ng-model="username" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
             </div>
-
             <div class="form-group">
-              <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+              <input type="password" ng-model="password" id="inputPassword" class="form-control" placeholder="Password" required>
             </div>
-
-            <div class="custom-control custom-checkbox mb-3">
-              <input type="checkbox" class="custom-control-input" id="customCheck1">
-              <label class="custom-control-label" for="customCheck1">Remember password?</label>
-            </div>
-            <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Sign in</button>
-            <hr class="my-4">
-            <div id="g_id_onload"
-              data-client_id="285606346890-n4n0u10t970qi4gjaegqepfjl444ei96.apps.googleusercontent.com"
-              data-context="use" data-ux_mode="popup" data-login_uri="http://127.0.0.1:5050" data-auto_prompt="false">
-            </div>
-            <div class="g_id_signin" data-type="standard" data-shape="rectangular" data-theme="outline"
-              data-text="$ {button.text}" data-size="large" data-logo_alignment="left">
-            </div>
-          </form>
+            <button class="btn btn-lg btn-primary btn-block text-uppercase" type="button" ng-click="authenticate()">Autenticarse</button>
+          </div>
         </div>
       </div>
     </div>
