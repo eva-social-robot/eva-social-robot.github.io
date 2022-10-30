@@ -6,7 +6,7 @@ eva.controller('interaccion', ['$scope', '$http', function ($scope, $http) {
   var workspace = null;
 
   $scope.list = function () {
-    getData(`${URL}/api/interaccion`, 'listado');
+    getData(`${URL}/api/interaction`, 'listado');
   }
 
   $scope.slist = function () {
@@ -31,7 +31,7 @@ eva.controller('interaccion', ['$scope', '$http', function ($scope, $http) {
   }
 
   $scope.iniciarInteracciong = function (id) {
-    $http.get(`${URL}/api/interaccion/${id}`).then(function (res) {
+    $http.get(`${URL}/api/interaction/${id}`).then(function (res) {
     }, function (error) {
       console.log(error);
     });
@@ -43,7 +43,7 @@ eva.controller('interaccion', ['$scope', '$http', function ($scope, $http) {
     console.log(JSON.stringify(xmlToJson(xml)));
 
     var json = { nombre: $scope.nombre, xml: xml_text };
-    $http.post(`${URL}/api/interaccion`, json).then(function successCallback(response) {
+    $http.post(`${URL}/api/interaction`, json).then(function successCallback(response) {
       $scope.reset();
       $scope.list();
       id = 0;
@@ -65,7 +65,7 @@ eva.controller('interaccion', ['$scope', '$http', function ($scope, $http) {
     console.log(JSON.stringify(xmlToJson(xml)));
     
     var json = { nombre: $scope.nombre, xml: xml_text };
-    $http.put(`${URL}/api/interaccion/` + $scope.updateid, json).then(function successCallback(response) {
+    $http.put(`${URL}/api/interaction/` + $scope.updateid, json).then(function successCallback(response) {
       if (end) {
         $scope.reset();
       }
@@ -76,7 +76,7 @@ eva.controller('interaccion', ['$scope', '$http', function ($scope, $http) {
 
   $scope.delete = function (id) {
     if (confirm(locale().COMMON.DELETE)) {
-      $http.delete(`${URL}/api/interaccion/${id}`).then(function successCallback(response) {
+      $http.delete(`${URL}/api/interaction/${id}`).then(function successCallback(response) {
         $scope.list();
       }, function errorCallback(response) {
       });
@@ -97,7 +97,7 @@ eva.controller('interaccion', ['$scope', '$http', function ($scope, $http) {
 
   $scope.download = function (l) {
     let filename = l.nombre + ".json";
-    // $http.get(`${URL}/api/api/interaccion/export/' + l._id).then(function successCallback(response) {
+    // $http.get(`${URL}/api/api/interaction/export/' + l._id).then(function successCallback(response) {
       // let tempobj = { nombre: l.nombre, data: response.data };
       var blob = new Blob([JSON.stringify(l, null, "\t")], { type: "text/plain;charset=utf-8" });
       saveAs(blob, filename);
