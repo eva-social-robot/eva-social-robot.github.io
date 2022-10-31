@@ -42,7 +42,7 @@ eva.controller('interaccion', ['$scope', '$http', function ($scope, $http) {
     var xml_text = Blockly.Xml.domToText(xml);
     console.log(JSON.stringify(xmlToJson(xml)));
 
-    var json = { nombre: $scope.nombre, xml: xml_text };
+    var json = { name: $scope.nombre, xml: xml_text };
     $http.post(`${URL}/api/interaction`, json).then(function successCallback(response) {
       $scope.reset();
       $scope.list();
@@ -64,7 +64,7 @@ eva.controller('interaccion', ['$scope', '$http', function ($scope, $http) {
     var xml_text = Blockly.Xml.domToText(xml);
     console.log(JSON.stringify(xmlToJson(xml)));
     
-    var json = { nombre: $scope.nombre, xml: xml_text };
+    var json = { name: $scope.nombre, xml: xml_text };
     $http.put(`${URL}/api/interaction/` + $scope.updateid, json).then(function successCallback(response) {
       if (end) {
         $scope.reset();
