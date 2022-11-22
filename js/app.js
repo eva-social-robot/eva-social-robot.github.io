@@ -19,11 +19,26 @@ eva.config(function ($translateProvider) {
   $translateProvider.preferredLanguage(localStorage.getItem("lang") || "es");
 });
 
-eva.controller("lang", function ($scope, $translate) {
+eva.controller("menu", function ($scope, $rootScope, $translate, $http, $location) {
+
+  $rootScope.loggedIn = false;
+
   $scope.changeLanguage = function (key) {
     localStorage.setItem("lang", key);
     $translate.use(key);
   };
+
+  $scope.init = function () {
+    if (!!sessionStorage.getItem("currentUser")) {
+      let token = JSON.parse(sessionStorage.getItem("currentUser")).token;
+      $http.defaults.headers.common.Authorization = 'Bearer ' + token;
+      $rootScope.loggedIn = true;
+      $rootScope.user = JSON.parse(atob(token.split('.')[1])).name || JSON.parse(atob(token.split('.')[1])).sub;
+    } else {
+      $location.path('/login');
+    }
+  }
+  $scope.init();
 });
 
 eva
@@ -85,9 +100,33 @@ eva
           templateUrl: "/plantillas/images.html",
           activetab: "images"
         })
+        .when("/account", {
+          templateUrl: "/plantillas/account.html",
+          activetab: ""
+        })
+        .when("/robot", {
+          templateUrl: "/plantillas/robot.html",
+          activetab: ""
+        })
         .otherwise("/controlAngular");
     },
   ])
-  .run(function ($rootScope, $route) {
-    $rootScope.$route = $route;
+  //.constant("URL", { API: "https://eva-repository.herokuapp.com" })
+  .run(function ($rootScope, $route, $http, $location) {
+    // $rootScope.$route = $route;
+    // $rootScope.loggedIn = false;
+
+    // if (!!sessionStorage.getItem("currentUser")) {
+    //   $http.defaults.headers.common.Authorization = 'Bearer ' + JSON.parse(sessionStorage.getItem("currentUser")).token;
+    //   $rootScope.loggedIn = true;
+    // }
+
+    // redirect to login page if not logged in and trying to access a restricted page
+    // $rootScope.$on('$locationChangeStart', function (event, next, current) {
+    //     var publicPages = ['/login'];
+    //     var restrictedPage = publicPages.indexOf($location.path()) === -1;
+    //     if (restrictedPage && !sessionStorage.getItem("currentUser")) {
+    //         $location.path('/login');
+    //     }
+    // });
   });

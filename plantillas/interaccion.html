@@ -16,10 +16,18 @@
             </thead>
             <tbody>
               <tr ng-repeat="l in listado">
-                <td>{{ l.nombre }}</td>
+                <td>{{ l.name }}</td>
                 <td>
-                  <span class="btn btn-default" ng-click="update(l)"><i class="fa fa-edit fa-sm"></i></span>
-                  <span class="btn btn-default" ng-click="download(l)"><i class="fa fa-download fa-sm"></i></span>
+                  <span class="btn btn-default" ng-show="!!l._id" ng-click="update(l)"><i class="fa fa-edit fa-sm"></i></span>
+                  <span class="btn-group" role="group">
+                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                      <i class="fa fa-download fa-sm"></i>
+                    </button>
+                    <div class="dropdown-menu" style="min-width: 1rem !important;">
+                      <span class="dropdown-item" ng-click="download(l, 1)"><i class="fa fa-robot fa-sm"></i></span>
+                      <span class="dropdown-item" ng-click="download(l, 2)"><i class="fa fa-computer fa-sm"></i></span>
+                    </div>
+                  </span>
                   <span class="btn btn-default" ng-click="delete(l._id)"><i class="fa fa-trash fa-sm"></i></span>
                 </td>
               </tr>
@@ -44,7 +52,7 @@
         <div class="form-group row">
           <label class="col-sm-2 control-label">{{'COMMON.NAME' | translate}}</label>
           <div class="col-sm-10">
-            <input type="text" class="form-control input-sm" ng-model="nombre" placeholder="Nombre">
+            <input type="text" class="form-control input-sm" ng-model="name" placeholder="Nombre">
           </div>
         </div>
           <div id="myDiagramDiv" style="border: solid 1px gray; border-radius: 1%; width:750px; height:525px">
@@ -64,6 +72,18 @@
                   <value name="B">
                     <shadow type="math_number">
                       <field name="NUM">1</field>
+                    </shadow>
+                  </value>
+                </block>
+                <block type="math_random_int">
+                  <value name="FROM">
+                    <shadow type="math_number">
+                      <field name="NUM">1</field>
+                    </shadow>
+                  </value>
+                  <value name="TO">
+                    <shadow type="math_number">
+                      <field name="NUM">100</field>
                     </shadow>
                   </value>
                 </block>

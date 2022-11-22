@@ -18,7 +18,12 @@ const es = {
         CONFIG: "Configuraciones",
         SOCIAL_ROBOT: "Robot Social",
         SERVICES: "Servicios",
-        IMGS: "Imagenes"
+        IMGS: "Imagenes",
+        PROFILE: "Perfil",
+        ROBOT: "Robots",
+        LOGIN: "Acceso",
+        LOGOUT: "Cerrar sesión",
+        WELCOME: "Bienvenido"
     },
     LANG: {
         MENU: "Idioma",
@@ -336,6 +341,32 @@ const es = {
             },
             ERROR: "A ocurrido un error al procesar su solicitud."
         }
+    },
+    ROBOT: {
+        TITLE: "Listado de robots",
+        MODAL: "Robot",
+        ALIAS: "Alias",
+        IDENTIFIER: "Identificador",
+        NOTIFY: {
+            POST: {
+                SUCCESS: "Robot agregado correctamente correctamente."
+            },
+            UPDATE: {
+                SUCCESS: "Robot actualizado correctamente."
+            },
+            DELETE: {
+                SUCCESS: "Robot eliminado correctamente."
+            },
+            ERROR: "A ocurrido un error al procesar su solicitud.",
+            UUID: "Identificador uuid inválido."
+        }
+    },
+    ACCOUNT: {
+        GIVENMANE: "Nombre",
+        FAMILYNAME: "Apellidos",
+        EMAIL: "Correo",
+        UPDATE: "Actualizar Perfil",
+        EMAILERROR: ""
     },
     COMMON: {
         NAME: "Nombre",

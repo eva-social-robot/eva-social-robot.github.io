@@ -1,0 +1,31 @@
+<div class="container" ng-controller="account">
+    <div class="row">
+        <div class="col-md-8 order-md-1">
+            <div
+                class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                <h1 class="h2">{{'TOOLBAR.PROFILE' | translate}}</h1>
+            </div>
+            <form class="needs-validation" novalidate="">
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="firstName">{{'ACCOUNT.GIVENMANE' | translate}}</label>
+                        <input type="text" class="form-control" id="firstName" placeholder="" ng-model="givenName">
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="lastName">{{'ACCOUNT.FAMILYNAME' | translate}}</label>
+                        <input type="text" class="form-control" id="lastName" placeholder="" ng-model="familyName">
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="email">{{'ACCOUNT.EMAIL' | translate}}
+                        <!-- <span class="text-muted">(Optional)</span> -->
+                    </label>
+                    <input type="email" class="form-control" id="email" placeholder="you@example.com" ng-model="email">
+                </div>
+                <button class="btn btn-primary btn-lg btn-block col-md-4" type="button"
+                    ng-click="update()">{{'ACCOUNT.UPDATE' | translate}}</button>
+            </form>
+        </div>
+    </div>
+</div>

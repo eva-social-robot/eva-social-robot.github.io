@@ -1,17 +1,23 @@
-eva.controller("login", ['$scope', '$http', function ($scope, $http) {
+eva.controller("login", ['$scope', '$rootScope', 'AuthenticationService', '$location', function ($scope, $rootScope, AuthenticationService, $location) {
 
-    $scope.authenticate = function() {
-      if (!sessionStorage.getItem('oauth_token')) {
-        if (!$scope.username || !$scope.password) {
-          alert("Please enter your email address or password");
-        } else {
-          $http.post(`${URL}/login`, { username: $scope.username, password: $scope.password }).then(function successCallback(response) {
-                sessionStorage.setItem('oauth_token', `Bearer ${response.data.value}`);
-                $http.defaults.headers.common['Authorization'] = sessionStorage.getItem('oauth_token')
-              }, function errorCallback(response) {
-            }
-          );
-        }
-      }
+    $scope.initController = function() {
+      $rootScope.loggedIn = false;
+      AuthenticationService.Logout();
     };
+    
+    $scope.authenticate = function() {
+      AuthenticationService.Login($scope.username, $scope.password, function (result) {
+        if (result === true) {
+            $location.path('/controlAngular');
+            $rootScope.loggedIn = true;
+            $rootScope.user = JSON.parse(atob(JSON.parse(sessionStorage.getItem('currentUser')).token.split('.')[1])).name || $scope.username;
+        } else {
+            // vm.error = 'Username or password is incorrect';
+            $rootScope.loggedIn = false;
+        }
+    });
+  }
+
+  $scope.initController();
+
 }]);
