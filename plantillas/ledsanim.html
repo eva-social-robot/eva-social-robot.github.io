@@ -44,7 +44,7 @@
                         <tbody>
                             <tr ng-repeat="l in listado" ng-if="l.show" role="row" class="{{ $even ? 'even' : 'odd'}}">
                                 <td>{{ l.name }}</td>
-                                <td><span class="btn btn-default" ng-click="details(l._id)"><i class="fa fa-download fa-sm"></i></span></td>
+                                <td><span class="btn btn-default" ng-click="details(l.id)"><i class="fa fa-download fa-sm"></i></span></td>
                                 <!-- <td><span class="btn btn-default" ng-click="delete(l.nombre)"><i class="fa fa-trash fa-sm"></i></span></td> -->
                             </tr>
                         </tbody>

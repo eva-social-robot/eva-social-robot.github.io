@@ -26,7 +26,7 @@ eva.controller("script", ["$scope", "$http", function ($scope, $http) {
 
   $scope.update = function (l) {
     $scope.nombre = l.nombre;
-    $scope.updateid = l._id;
+    $scope.updateid = l.id;
     $scope.icon = false;
     $scope.accion = locale().COMMON.EDIT;
     $("#myModal").modal("show");

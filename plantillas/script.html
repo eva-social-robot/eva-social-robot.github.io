@@ -43,9 +43,9 @@
                         <tbody>
                             <tr ng-repeat="l in listado" ng-if="l.show">
                                 <td>{{ l.nombre }}</td>
-                                <td><a class="btn btn-default" href="/app.html#!/scriptdata/{{l._id}}"><span class="fa fa-list"></span></a></td>
+                                <td><a class="btn btn-default" href="/app.html#!/scriptdata/{{l.id}}"><span class="fa fa-list"></span></a></td>
                                 <td><span class="btn btn-default" ng-click="update(l)"><i class="fa fa-edit fa-sm"></i></span></td>
-                                <td><span class="btn btn-default" ng-click="delete(l._id)"><i class="fa fa-trash fa-sm"></i></span>
+                                <td><span class="btn btn-default" ng-click="delete(l.id)"><i class="fa fa-trash fa-sm"></i></span>
                                 </td>
                             </tr>
                         </tbody>

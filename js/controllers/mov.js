@@ -32,7 +32,7 @@ eva.controller('mov', ['$scope', '$http', function ($scope, $http) {
     }
 
     $scope.update = function (l) {
-        $scope.updateid = l._id;
+        $scope.updateid = l.id;
         $scope.nombre = l.nombre;
         $scope.codigo = l.codigo;
         $scope.icon = false;

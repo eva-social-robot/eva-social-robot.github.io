@@ -1,7 +1,12 @@
 var dataVoice = [["option", "OPTIONNAME"]];
 var dataSource = [["option", "OPTIONNAME"]];
 var voice = new Promise((resolve, reject) => {
-  // fetch(`${URL}/api/voice`)
+  // fetch(`${URL}/api/voice`,
+  //   {
+  //     headers: {
+  //       'Authorization': 'Bearer ' + JSON.parse(sessionStorage.getItem("currentUser")).token
+  //     }
+  //   })
   //   .then(response => response.json())
   //   .then(data => {
   //     dataVoice = [];

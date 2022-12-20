@@ -24,7 +24,7 @@ eva.controller('listen', ['$scope', '$http', function ($scope, $http) {
     }
 
     $scope.update = function (l) {
-        $scope.updateid = l._id;
+        $scope.updateid = l.id;
         $scope.idioma = l.idioma;
         $scope.codigo = l.codigo;
         $scope.watson = l.watson;

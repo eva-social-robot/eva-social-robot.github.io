@@ -35,7 +35,7 @@ eva.controller('scriptdata', ['$scope', '$http', '$routeParams', function ($scop
     }
 
     $scope.update = function (l) {
-        $scope.updateid = l._id;
+        $scope.updateid = l.id;
         $scope.c1 = l.campo1;
         $scope.c2 = l.campo2;
         $scope.c3 = l.campo3;

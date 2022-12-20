@@ -1,5 +1,6 @@
 eva.controller('interaccion', ['$scope', '$http', function ($scope, $http) {
   $scope.listado = [];
+  $scope.rl = [];
   $scope.stt = [];
   $scope.icon = true;
   $scope.updateid;
@@ -32,12 +33,17 @@ eva.controller('interaccion', ['$scope', '$http', function ($scope, $http) {
     });
   }
 
-  $scope.iniciarInteracciong = function (id) {
-    $http.get(`${URL}/api/interaction/${id}`).then(function (res) {
-    }, function (error) {
-      console.log(error);
-    });
+  $scope.iniciarInteracciong = function (obj, robot) {
+    publish(robot, obj.xml);
   };
+
+  $scope.rl = function () {
+    $http.get(`${URL}/api/robot`).then(function successCallback(response) {
+      $scope.rl = response.data;
+    }, function errorCallback(response) {
+      $scope.rl = [];
+    });
+  }
 
   $scope.create = function () {
     var xml = Blockly.Xml.workspaceToDom(workspace);
@@ -55,7 +61,7 @@ eva.controller('interaccion', ['$scope', '$http', function ($scope, $http) {
 
   $scope.update = function (l) {
     $scope.reset();
-    $scope.updateid = l._id;
+    $scope.updateid = l.id;
     $scope.name = l.name;
     var xml = Blockly.Xml.textToDom(l.xml);
     Blockly.Xml.domToWorkspace(xml, workspace);
@@ -256,14 +262,14 @@ eva.controller('interaccion', ['$scope', '$http', function ($scope, $http) {
   }
 
   $scope.asSimulator = function (name, obj) {
-    
+
     let nodes = $scope.jsonToNodes(obj);
     let settings = "";
     let body = [];
 
     for (let i = 0; i < nodes.length; i++) {
       const element = nodes[i];
-      
+
       if (element.type == "emotion") {
         let emotion = { ini: "NEUTRAL", joy: "HAPPY", sad: "SAD", anger: "ANGER" };
         body.push(`<evaEmotion emotion="${emotion[element.emotion]}" />`);
@@ -276,7 +282,7 @@ eva.controller('interaccion', ['$scope', '$http', function ($scope, $http) {
       } else if (element.type == "sound") {
         body.push(`<audio source="${element.src}" block="TRUE"/>`);
       }
-      
+
     }
     return `<?xml version="1.0" encoding="UTF-8"?>
     <evaml name="${name}" xsi:noNamespaceSchemaLocation="EvaML-Schema/evaml_schema.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
@@ -295,4 +301,5 @@ eva.controller('interaccion', ['$scope', '$http', function ($scope, $http) {
 
   $scope.list();
   $scope.slist();
+  $scope.rl();
 }]);

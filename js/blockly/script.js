@@ -1,13 +1,18 @@
 var dataScript = [["option", "OPTIONNAME"]];
 var script = new Promise((resolve, reject) => {
-  // fetch(`${URL}/api/script`)
-  //   .then(response => response.json())
-  //   .then(data => {
-  //     dataScript = [];
-  //     for (let i = 0; i < data.length; i++) {
-  //       dataScript.push([data[i].nombre, data[i]._id]);
-  //     }
-  //   })
+  fetch(`${URL}/api/script`,
+    {
+      headers: {
+        'Authorization': 'Bearer ' + JSON.parse(sessionStorage.getItem("currentUser")).token
+      }
+    })
+    .then(response => response.json())
+    .then(data => {
+      dataScript = [];
+      for (let i = 0; i < data.length; i++) {
+        dataScript.push([data[i].nombre, data[i].id]);
+      }
+    })
   resolve();
 });
 

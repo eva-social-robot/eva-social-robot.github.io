@@ -18,7 +18,17 @@
               <tr ng-repeat="l in listado">
                 <td>{{ l.name }}</td>
                 <td>
-                  <span class="btn btn-default" ng-show="!!l._id" ng-click="update(l)"><i class="fa fa-edit fa-sm"></i></span>
+                  <span class="btn btn-default" ng-show="!!l.id" ng-click="update(l)"><i class="fa fa-edit fa-sm"></i></span>
+                  
+                  <span class="btn-group" role="group">
+                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                      <i class="fa fa-play fa-sm"></i>
+                    </button>
+                    <div class="dropdown-menu" style="min-width: 1rem !important;">
+                      <span ng-repeat="r in rl" class="dropdown-item" ng-click="iniciarInteracciong(l, r.robot)"><i class="fa fa-robot fa-sm"></i>{{ r.alias }}</span>
+                    </div>
+                  </span>
+                  
                   <span class="btn-group" role="group">
                     <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
                       <i class="fa fa-download fa-sm"></i>
@@ -28,7 +38,8 @@
                       <span class="dropdown-item" ng-click="download(l, 2)"><i class="fa fa-computer fa-sm"></i></span>
                     </div>
                   </span>
-                  <span class="btn btn-default" ng-click="delete(l._id)"><i class="fa fa-trash fa-sm"></i></span>
+                  
+                  <span class="btn btn-default" ng-click="delete(l.id)"><i class="fa fa-trash fa-sm"></i></span>
                 </td>
               </tr>
             </tbody>

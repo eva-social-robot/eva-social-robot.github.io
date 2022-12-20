@@ -46,7 +46,7 @@ eva.controller('led', ['$scope', '$http', function ($scope, $http) {
     }
 
     $scope.update = function (l) {
-        Object.assign($scope, { updateid: l._id, nombre: l.nombre, base: l.base });
+        Object.assign($scope, { updateid: l.id, nombre: l.nombre, base: l.base });
         $scope.changeform(l.opts);
         $scope.icon = false;
         $scope.accion = locale().COMMON.EDIT;
