@@ -34,7 +34,7 @@ eva.controller('interaccion', ['$scope', '$http', function ($scope, $http) {
   }
 
   $scope.iniciarInteracciong = function (obj, robot) {
-    publish(robot, obj.xml);
+    publish(robot, JSON.stringify({ type: 'int', data: obj.xml }));
   };
 
   $scope.rl = function () {
