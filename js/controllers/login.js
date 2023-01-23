@@ -9,6 +9,7 @@ eva.controller("login", ['$scope', '$rootScope', 'AuthenticationService', '$loca
       AuthenticationService.Login($scope.username, $scope.password, function (result) {
         if (result === true) {
           if (window.location.href.includes('?')) {
+            localStorage.setItem('currentUser', sessionStorage.getItem('currentUser'));
             let values = window.location.href
             .split('?')[1]
             .split('&')
