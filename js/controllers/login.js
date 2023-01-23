@@ -8,11 +8,14 @@ eva.controller("login", ['$scope', '$rootScope', 'AuthenticationService', '$loca
     $scope.authenticate = function() {
       AuthenticationService.Login($scope.username, $scope.password, function (result) {
         if (result === true) {
-          const params = new Proxy(new URLSearchParams(window.location.search), {
-            get: (searchParams, prop) => searchParams.get(prop),
-          });
-          if (params.redirect) {
-            window.location.replace(params.redirect);
+          if (window.location.href.includes('?')) {
+            let values = window.location.href
+            .split('?')[1]
+            .split('&')
+            .map(i => { 
+              let temp = i.split('=');
+              return { key: temp[0], value: decodeURIComponent(temp[1]) } });
+              window.location.replace(values[0].value);
           } else {
             $location.path('/controlAngular');
             $rootScope.loggedIn = true;
