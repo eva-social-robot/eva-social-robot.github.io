@@ -1,10 +1,10 @@
 eva.controller('account', ['$scope', '$rootScope', '$http', function ($scope, $rootScope, $http) {
     
     $scope.init = function () {
-        let user = JSON.parse(atob(JSON.parse(sessionStorage.getItem('currentUser')).token.split('.')[1]));
-        $scope.givenName = user.given_name;
-        $scope.familyName = user.family_name;
-        $scope.email = user.sub;
+        let user = JSON.parse(sessionStorage.getItem('currentUser'));
+        $scope.givenName = user.givenName;
+        $scope.familyName = user.familyName;
+        $scope.email = user.username;
     }
 
     $scope.update = function () {

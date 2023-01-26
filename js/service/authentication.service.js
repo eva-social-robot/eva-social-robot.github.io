@@ -11,7 +11,7 @@ eva.factory('AuthenticationService', ['$http', function ($http) {
         $http.post(`${URL}/login`, { username: username, password: password })
         .then(function successCallback(response) {
             if (response.data.value) {
-                sessionStorage.setItem("currentUser", JSON.stringify({ username: username, token: response.data.value }));
+                sessionStorage.setItem("currentUser", JSON.stringify({ ...response.data, username: username }));
                 $http.defaults.headers.common.Authorization = 'Bearer ' + response.data.value;
                 callback(true);
             } else {
