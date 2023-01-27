@@ -1,18 +1,20 @@
 var dataSound = [["option", "OPTIONNAME"]];
 var sound = new Promise((resolve, reject) => {
-  fetch(`${URL}/api/audio`,
-    {
-      headers: {
-        'Authorization': 'Bearer ' + JSON.parse(sessionStorage.getItem("currentUser")).token
-      }
-    })
-    .then(response => response.json())
-    .then(data => {
-      dataSound = [];
-      for (let i = 0; i < data.length; i++) {
-        dataSound.push([data[i].nombre, data[i].nombre]);
-      }
-    })
+  if (sessionStorage.getItem("currentUser")) {
+    fetch(`${URL}/api/audio`,
+      {
+        headers: {
+          'Authorization': 'Bearer ' + JSON.parse(sessionStorage.getItem("currentUser")).token
+        }
+      })
+      .then(response => response.json())
+      .then(data => {
+        dataSound = [];
+        for (let i = 0; i < data.length; i++) {
+          dataSound.push([data[i].nombre, data[i].nombre]);
+        }
+      })
+  }
   resolve();
 });
 

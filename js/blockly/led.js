@@ -1,18 +1,20 @@
 var dataLed = [["option", "OPTIONNAME"]];
 var led = new Promise((resolve, reject) => {
-  fetch(`${URL}/api/led`,
-    {
-      headers: {
-        'Authorization': 'Bearer ' + JSON.parse(sessionStorage.getItem("currentUser")).token
-      }
-    })
-    .then(response => response.json())
-    .then(data => {
-      dataLed = [];
-      for (let i = 0; i < data.length; i++) {
-        dataLed.push([data[i].nombre, data[i].id]);
-      }
-    })
+  if (sessionStorage.getItem("currentUser")) {
+    fetch(`${URL}/api/led`,
+      {
+        headers: {
+          'Authorization': 'Bearer ' + JSON.parse(sessionStorage.getItem("currentUser")).token
+        }
+      })
+      .then(response => response.json())
+      .then(data => {
+        dataLed = [];
+        for (let i = 0; i < data.length; i++) {
+          dataLed.push([data[i].nombre, data[i].id]);
+        }
+      })
+  }
   resolve();
 })
 

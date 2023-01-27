@@ -22,7 +22,6 @@ eva.controller("login", ['$scope', '$rootScope', 'AuthenticationService', '$loca
             $rootScope.user = JSON.parse(sessionStorage.getItem('currentUser')).name || $scope.username;
           }
         } else {
-            // vm.error = 'Username or password is incorrect';
             $rootScope.loggedIn = false;
         }
     });

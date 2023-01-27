@@ -1,18 +1,20 @@
 var dataInteraction = [["option", "OPTIONNAME"]];
 var interaction = new Promise((resolve, reject) => {
-  fetch(`${URL}/api/interaction`,
-    {
-      headers: {
-        'Authorization': 'Bearer ' + JSON.parse(sessionStorage.getItem("currentUser")).token
-      }
-    })
-    .then(response => response.json())
-    .then(data => {
-      dataInteraction = [];
-      for (let i = 0; i < data.length; i++) {
-        dataInteraction.push([data[i].nombre, data[i].id]);
-      }
-    })
+  if (sessionStorage.getItem("currentUser")) {
+    fetch(`${URL}/api/interaction`,
+      {
+        headers: {
+          'Authorization': 'Bearer ' + JSON.parse(sessionStorage.getItem("currentUser")).token
+        }
+      })
+      .then(response => response.json())
+      .then(data => {
+        dataInteraction = [];
+        for (let i = 0; i < data.length; i++) {
+          dataInteraction.push([data[i].nombre, data[i].id]);
+        }
+      })
+  }
   resolve();
 })
 
