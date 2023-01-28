@@ -15,7 +15,7 @@ eva.controller("login", ['$scope', '$rootScope', 'AuthenticationService', '$loca
             .map(i => { 
               let temp = i.split('=');
               return { key: temp[0], value: decodeURIComponent(temp[1]) } });
-              window.location.replace(values[0].value + `?token="${sessionStorage.getItem('currentUser').token}`);
+              window.location.replace(values[0].value + `?token=${sessionStorage.getItem('currentUser').token}`);
           } else {
             $location.path('/controlAngular');
             $rootScope.loggedIn = true;
