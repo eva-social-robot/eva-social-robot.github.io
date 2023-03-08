@@ -1,4 +1,5 @@
 const es = {
+    CODE: 'es-MX',
     TOOLBAR: {
         NAME: "Control Eva",
         INI: "Inicio",
@@ -11,8 +12,7 @@ const es = {
         VOICE: "Voz",
         LISTEN: "Escuchar",
         LED: "Led",
-        LEDS_ANIMATIONS: "Animación Led",
-        LEDS_ANIMATIONS_DATA: "Configuración de las Animaciones",
+        EDITOR: "Editor",
         MOVEMENT: "Movimiento",
         WOO: "Mago de Oz",
         CONFIG: "Configuraciones",
@@ -33,16 +33,6 @@ const es = {
         FR: "Francés",
         IT: "Italiano",
         JA: "Japonés"
-    },
-    DATATABLE: {
-        SHOW: "Mostrar",
-        SEARCH: "Buscar",
-        SHOWING: "Mostrando",
-        TO: "a",
-        OF: "de",
-        ENTRIES: "registros",
-        PREVIOUS: "Anterior",
-        NEXT: "Siguiente",
     },
     AUDIO: {
         TITLE: "Listado de Audios",
@@ -110,7 +100,8 @@ const es = {
         INTERACTIONS: "Interacciones",
         EXPORT: "Exportar",
         CONTROL_SCRIPT: "Control Script",
-        SCRIPTS: "Scripts"
+        SCRIPTS: "Scripts",
+        STORE: "Tienda"
     },
     INTERACTION: {
         TITLE: "Listado de Interacciones",
@@ -199,7 +190,9 @@ const es = {
         SOURCE: "Idioma de origen",
         RECORD: "Grabar",
         IMAGE: "Imagen",
-        SCREEN_RESET: "Pantalla de inicio"
+        SCREEN_RESET: "Pantalla de inicio",
+        UNINSTALL: "Desinstalar",
+        UNINSTALL_DESC: "Desinstalar eliminará la interacción y los elementos relacionados con la misma."
     },
     LED: {
         TITLE: "Listado de Animaciones led",
@@ -210,6 +203,7 @@ const es = {
         NUM: "Num",
         TIME: "Tiempo",
         MS: "Milisegundos",
+        LOOP: 'Bucle',
         NOTIFY: {
             POST: {
                 SUCCESS: "Animación led creada correctamente."
@@ -225,6 +219,19 @@ const es = {
             },
             ERROR: "A ocurrido un error al procesar su solicitud."
         }
+    },
+    LEDEDITOR: {
+        TITLE: "Editor de Animaciones led",
+        MODAL: "Cuadro",
+        GRADIENT_INIT: "Gradiente desde",
+        GRADIENT_UNTIL: "hasta",
+        MOV_LEDS: "Desplazar leds",
+        CLONE_LEDS: "Clonar Leds",
+        DELETE_FRAMES: "Eliminar cuadro",
+        DELETE_NEXT: "y los siguientes",
+        LED_EMULATOR: "Emulador",
+        LOOPS: "Iteraciones",
+        FRAME_SKIP: "Saltar"
     },
     LISTEN: {
         TITLE: "Listado de modelos de voz",
@@ -341,32 +348,6 @@ const es = {
             },
             ERROR: "A ocurrido un error al procesar su solicitud."
         }
-    },
-    ROBOT: {
-        TITLE: "Listado de robots",
-        MODAL: "Robot",
-        ALIAS: "Alias",
-        IDENTIFIER: "Identificador",
-        NOTIFY: {
-            POST: {
-                SUCCESS: "Robot agregado correctamente correctamente."
-            },
-            UPDATE: {
-                SUCCESS: "Robot actualizado correctamente."
-            },
-            DELETE: {
-                SUCCESS: "Robot eliminado correctamente."
-            },
-            ERROR: "A ocurrido un error al procesar su solicitud.",
-            UUID: "Identificador uuid inválido."
-        }
-    },
-    ACCOUNT: {
-        GIVENMANE: "Nombre",
-        FAMILYNAME: "Apellidos",
-        EMAIL: "Correo",
-        UPDATE: "Actualizar Perfil",
-        EMAILERROR: ""
     },
     COMMON: {
         NAME: "Nombre",

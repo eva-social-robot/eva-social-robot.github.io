@@ -1,41 +1,65 @@
 eva.controller('audio', ['$scope', '$http', function ($scope, $http) {
-    $scope.listado = [];
-    $scope.icon = true;
-    $scope.updateid;
-    Object.assign($scope, dataTableValues());
 
     $scope.list = function () {
-        $http.get(`${URL}/api/audio`).then(function successCallback(response) {
-            $scope.listado = response.data;
-            $scope.dataTable();
-        }, function errorCallback(response) {
-        });
+        $('#listadoAudio').bootstrapTable({
+            url: `${URL}/api/audio`,
+            pagination: true,
+            search: true,
+            searchTimeOut: 1000,
+            locale: 'es-MX',
+            columns: [{
+                field: 'nombre',
+                title: locale().COMMON.NAME,
+                sortable: true,
+                searchable: true,
+                align: 'left',
+                width: 600,
+                widthUnit: 'px',
+            }, {
+                field: 'ext',
+                title: locale().AUDIO.FORMAT,
+                sortable: true,
+                searchable: true,
+                align: 'left',
+                width: 50,
+                widthUnit: 'px',
+            }, {
+                field: 'duration',
+                title: locale().AUDIO.DURATION,
+                sortable: true,
+                searchable: true,
+                align: 'left',
+                width: 150,
+                widthUnit: 'px',
+            }, {
+                title: locale().COMMON.OPTIONS,
+                align: 'center',
+                width: 200,
+                widthUnit: 'px',
+                formatter: function (value, row, index) {
+                    return [`<span class="btn btn-default" onclick="playAudio(${row.nombre})"><i class="fa fa-play fa-sm"></i></span>
+                    <span class="btn btn-default" onclick="deleteAudio(${row.nombre})"><i class="fa fa-trash fa-sm"></i></span>`];
+                }
+            }]
+        })
     }
 
-    $scope.details = function (id) {
-        const downloadLink = document.createElement("a");
-        downloadLink.href = `${URL}/api/audio/${id}`;
-        downloadLink.download = id;
-        downloadLink.click();
-    }
-
-    $scope.delete = function (id) {
-        if (confirm(locale().COMMON.DELETE)) {
-            $http.delete(`${URL}/api/audio/${id}`).then(function successCallback(response) {
-                $scope.list();
-                notify(locale().AUDIO.NOTIFY.DELETE.SUCCESS);
-            }, function errorCallback(response) {
-                notify(locale().AUDIO.NOTIFY.ERROR,  'danger');
-            });
-        }
-    }
-        
-    $scope.dataTable = function (way = 0) {
-        let obj = dataTable($scope, way, 'nombre');
-        Object.assign($scope, obj);
-    }
-
-    $("div#drop").dropzone({ url: `${URL}/api/audio`, acceptedFiles: '.wav', timeout: 100000, maxFilesize: 100 });
-
+    $("div#drop").dropzone({ url: URL + "/api/audio", acceptedFiles: '.wav', timeout: 100000, maxFilesize: 100 });
     $scope.list();
 }]);
+
+function deleteAudio(id) {
+    fetch(`${URL}/api/audio/${id}`, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json',
+        }
+    }).then((response) => response.json())
+        .then((data) => {
+            notify(locale().AUDIO.NOTIFY.DELETE.SUCCESS);
+        })
+        .catch((error) => {
+            notify(locale().AUDIO.NOTIFY.ERROR, 'danger');
+        });
+    $('#listadoAudio').bootstrapTable('refresh');
+}

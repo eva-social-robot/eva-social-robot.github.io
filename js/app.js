@@ -5,7 +5,7 @@ var eva = angular.module("evaApp", [
   "ngSanitize"
 ]);
 
-var lang = { es: es, en: en, pt: pt, fr: fr, it: it, ja: ja };
+var lang = { es: es, en: en, pt: pt };
 function locale() {
   return lang[localStorage.getItem("lang") || "es"];
 }
@@ -31,7 +31,7 @@ eva.controller("menu", function ($scope, $rootScope, $translate, $http, $locatio
   $scope.init = function () {
     if (!!sessionStorage.getItem("currentUser")) {
       let token = JSON.parse(sessionStorage.getItem("currentUser")).token;
-      $http.defaults.headers.common.Authorization = 'Bearer ' + token;
+      //$http.defaults.headers.common.Authorization = 'Bearer ' + token;
       $rootScope.loggedIn = true;
       $rootScope.user = JSON.parse(atob(token.split('.')[1])).name || JSON.parse(atob(token.split('.')[1])).sub;
     } else {
@@ -92,6 +92,14 @@ eva
           templateUrl: "/plantillas/led.html",
           activetab: "led"
         })
+        .when("/lededitor", {
+          templateUrl: "/plantillas/lededitor.html",
+          activetab: "lededitor"
+        })
+        .when("/lededitor/{id}", {
+          templateUrl: "/plantillas/lededitor.html",
+          activetab: "lededitor"
+        })
         .when("/mov", {
           templateUrl: "/plantillas/mov.html",
           activetab: "mov"
@@ -108,25 +116,12 @@ eva
           templateUrl: "/plantillas/robot.html",
           activetab: ""
         })
+        .when("/woo", {
+          templateUrl: "/plantillas/woo.html",
+          activetab: "woo"
+        })
         .otherwise("/controlAngular");
     },
   ])
-  //.constant("URL", { API: "https://eva-repository.herokuapp.com" })
   .run(function ($rootScope, $route, $http, $location) {
-    // $rootScope.$route = $route;
-    // $rootScope.loggedIn = false;
-
-    // if (!!sessionStorage.getItem("currentUser")) {
-    //   $http.defaults.headers.common.Authorization = 'Bearer ' + JSON.parse(sessionStorage.getItem("currentUser")).token;
-    //   $rootScope.loggedIn = true;
-    // }
-
-    // redirect to login page if not logged in and trying to access a restricted page
-    // $rootScope.$on('$locationChangeStart', function (event, next, current) {
-    //     var publicPages = ['/login'];
-    //     var restrictedPage = publicPages.indexOf($location.path()) === -1;
-    //     if (restrictedPage && !sessionStorage.getItem("currentUser")) {
-    //         $location.path('/login');
-    //     }
-    // });
   });

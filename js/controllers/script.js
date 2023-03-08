@@ -1,68 +1,113 @@
 eva.controller("script", ["$scope", "$http", function ($scope, $http) {
-  $scope.listado = [];
-  $scope.accion = locale().COMMON.ADD;
-  $scope.icon = true;
-  $scope.updateid;
-  Object.assign($scope, dataTableValues());
-
   $scope.list = function () {
-    $http.get(`${URL}/api/script`).then(function successCallback(response) {
-      $scope.listado = response.data;
-      $scope.dataTable();
-    }, function errorCallback(response) { }
-    );
+    $('#listadoScript').bootstrapTable({
+      url: `${URL}/api/script`,
+      pagination: true,
+      search: true,
+      searchTimeOut: 1000,
+      locale: locale().CODE,
+      columns: [{
+        field: 'name',
+        title: locale().COMMON.NAME,
+        sortable: true,
+        searchable: true,
+        align: 'left',
+        width: 500,
+        widthUnit: 'px',
+      }, {
+        title: locale().COMMON.OPTIONS,
+        align: 'center',
+        width: 200,
+        widthUnit: 'px',
+        formatter: function (value, row, index) {
+          return [`<a class="btn btn-default" href="/#!/scriptdata/${row._id}">
+          <span class="fa fa-list"></span>
+          </a>
+          <span class="btn btn-default" onclick="setForUpdateScript('${row._id}')">
+          <i class="fa fa-edit fa-sm"></i>
+          </span>
+          <span class="btn btn-default" onclick="deleteScript('${row._id}')">
+          <i class="fa fa-trash fa-sm"></i>
+          </span>`];
+        }
+      }]
+    })
   };
-
-  $scope.create = function () {
-    var json = { nombre: $scope.nombre };
-    $http.post(`${URL}/api/script`, json).then(function successCallback(response) {
-      $scope.clear();
-      notify(locale().SCRIPT.NOTIFY.POST.SUCCESS);
-    }, function errorCallback(response) {
-      notify(locale().SCRIPT.NOTIFY.ERROR, 'danger');
-    }
-    );
-  };
-
-  $scope.update = function (l) {
-    $scope.nombre = l.nombre;
-    $scope.updateid = l.id;
-    $scope.icon = false;
-    $scope.accion = locale().COMMON.EDIT;
-    $("#myModal").modal("show");
-  };
-
-  $scope.updatesend = function () {
-    var json = { nombre: $scope.nombre };
-    $http.put(`${URL}/api/script/` + $scope.updateid, json).then(function successCallback(response) {
-      $scope.clear();
-      notify(locale().SCRIPT.NOTIFY.UPDATE.SUCCESS);
-    }, function errorCallback(response) {
-      notify(locale().SCRIPT.NOTIFY.ERROR, 'danger');
-    }
-    );
-  };
-
-  $scope.delete = function (id) {
-    if (confirm(locale().COMMON.DELETE)) {
-      $http.delete(`${URL}/api/script/${id}`).then(function successCallback(response) {
-        $scope.list();
-        notify(locale().SCRIPT.NOTIFY.DELETE.SUCCESS);
-      }, function errorCallback(response) {
-        notify(locale().SCRIPT.NOTIFY.ERROR, 'danger');
-      });
-    }
-  };
-
-  $scope.clear = function () {
-    Object.assign($scope, { nombre: "", icon: true, accion: locale().COMMON.ADD });
-    $("#myModal").modal("hide");
-    $scope.list();
-  };
-
-  $scope.dataTable = function (way = 0) {
-    Object.assign($scope, dataTable($scope, way, 'nombre'));
-  }
-
   $scope.list();
-}]);
+},
+]);
+
+function newScript() {
+  postData(`${URL}/api/script`, {
+    nombre: document.getElementById('scriptNombre').value,
+  }).then((data) => {
+    notify(locale().SCRIPT.NOTIFY.POST.SUCCESS);
+    cleanScriptModal();
+  })
+    .catch((error) => {
+      notify(locale().SCRIPT.NOTIFY.ERROR, 'danger');
+    });
+}
+
+function setForUpdateScript(id) {
+  getData(`${URL}/api/script/${id}`).then(edit => {
+    document.getElementById('scriptId').value = id;
+    document.getElementById('scriptNombre').value = edit.nombre;
+    openScriptModalEdit();
+  });
+}
+
+function updateScript() {
+  let id = document.getElementById('scriptId').value;
+  putData(`${URL}/api/script/${id}`, {
+    nombre: document.getElementById('scriptNombre').value
+  }).then((data) => {
+    notify(locale().SCRIPT.NOTIFY.UPDATE.SUCCESS);
+    cleanScriptModal();
+  })
+    .catch((error) => {
+      notify(locale().SCRIPT.NOTIFY.ERROR, 'danger');
+    });
+}
+
+function deleteScript(id) {
+  deleteData(`${URL}/api/script/${id}`)
+    .then((data) => {
+      notify(locale().SCRIPT.NOTIFY.DELETE.SUCCESS);
+    })
+    .catch((error) => {
+      notify(locale().SCRIPT.NOTIFY.ERROR, 'danger');
+    });
+  $('#listadoScript').bootstrapTable('refresh');
+}
+
+function modalTitle(id, title) {
+  document.getElementById(id).innerText = title;
+}
+
+function cleanScriptModal() {
+  document.getElementById('scriptId').value = "";
+  document.getElementById('scriptNombre').value = "";
+  modal.hide();
+  $('#listadoScript').bootstrapTable('refresh');
+}
+
+function openScriptModalAdd() {
+  document.getElementById('bUpdate').style.display = 'none';
+  document.getElementById('bSave').style.display = 'block';
+  modalTitle('modalScriptLabel', `${locale().COMMON.ADD} ${locale().SCRIPT.MODAL}`);
+  modal = new bootstrap.Modal('#modalScript', {
+    keyboard: false
+  })
+  modal.show();
+}
+
+function openScriptModalEdit() {
+  document.getElementById('bSave').style.display = 'none';
+  document.getElementById('bUpdate').style.display = 'block';
+  modalTitle('modalScriptLabel', `${locale().COMMON.EDIT} ${locale().LISTEN.MODAL}`);
+  modal = new bootstrap.Modal('#modalScript', {
+    keyboard: false
+  })
+  modal.show();
+}

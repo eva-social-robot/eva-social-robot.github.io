@@ -1,123 +1,56 @@
 eva.controller('led', ['$scope', '$http', function ($scope, $http) {
-    $scope.listado = [];
-    $scope.listBaseAnims = [];
-    $scope.icon = true;
-    $scope.accion = locale().COMMON.ADD;
-    $scope.updateid;
-    Object.assign($scope, dataTableValues());
-    $scope.params = { color: [], led: [], num: [], time: false };
 
     $scope.list = function () {
-        $http.get(`${URL}/api/led`).then(function successCallback(response) {
-            $scope.listado = response.data;
-            $scope.dataTable();
-        }, function errorCallback(response) {
-        });
+        $('#listadoLeds').bootstrapTable({
+            url: `${URL}/api/led`,
+            pagination: true,
+            search: true,
+            searchTimeOut: 1000,
+            locale: 'es-MX',
+            columns: [{
+                field: 'name',
+                title: locale().COMMON.NAME,
+                sortable: true,
+                searchable: true,
+                align: 'left',
+                width: 700,
+                widthUnit: 'px'
+            }, {
+                field: 'bucle',
+                title: locale().LED.LOOP,
+                width: 100,
+                widthUnit: 'px',
+                formatter: function (value, row, index) {
+                    return [`${row.bucle ? '<i class="fa-solid fa-repeat"></i>' : (row.loops || 1)}`];
+                }
+            }, {
+                title: locale().COMMON.OPTIONS,
+                align: 'center',
+                width: 200,
+                widthUnit: 'px',
+                formatter: function (value, row, index) {
+                    return [`<span class="btn btn-default hand" id="${row._id}" onclick="executeById(this)"><i class="fa fa-play fa-sm"></i></span>
+                    <a class="btn btn-default hand" href="/#!/lededitor/${row._id}"><i class="fa-solid fa-pen-to-square"></i></a>
+                    <span class="btn btn-default hand" onclick="deleteLed('${row._id}')"><i class="fa fa-trash fa-sm"></i></span>`];
+                }
+            }]
+        })
     }
-
-    $scope.baseAnims = function () {
-        $http.get(`${URL}/api/ledsanimations`).then(function successCallback(response) {
-            $scope.listBaseAnims = response.data;
-        }, function errorCallback(response) {
-        });
-    }
-
-    $scope.create = function () {
-        $scope.loadForm();
-        var json = { nombre: $scope.nombre, base: $scope.base, opts: $scope.opts };
-        $http.post(`${URL}/api/led`, json).then(function successCallback(response) {
-            $scope.clear();
-            notify(locale().LED.NOTIFY.POST.SUCCESS);
-        }, function errorCallback(response) {
-            notify(locale().LED.NOTIFY.ERROR,  'danger');
-        });
-    }
-
-    $scope.clone = function (obj) {
-        delete obj._id;
-        let nuevoNombre = prompt("Inserte el nuevo nombre");
-        obj.nombre = !!nuevoNombre ? nuevoNombre : Date.now().toString(36);
-        $http.post(`${URL}/api/led`, obj).then(function successCallback(response) {
-            $scope.list();
-            notify(locale().LED.NOTIFY.CLONE.SUCCESS);
-        }, function errorCallback(response) {
-            notify(locale().LED.NOTIFY.ERROR,  'danger');
-        });
-    }
-
-    $scope.update = function (l) {
-        Object.assign($scope, { updateid: l.id, nombre: l.nombre, base: l.base });
-        $scope.changeform(l.opts);
-        $scope.icon = false;
-        $scope.accion = locale().COMMON.EDIT;
-        $('#myModal').modal('show');
-    }
-
-    $scope.updatesend = function () {
-        $scope.loadForm();
-        var json = { nombre: $scope.nombre, base: $scope.base, opts: $scope.opts };
-        $http.put(`${URL}/api/led/${$scope.updateid}`, json).then(function successCallback(response) {
-            $scope.clear();
-            notify(locale().LED.NOTIFY.UPDATE.SUCCESS);
-        }, function errorCallback(response) {
-            notify(locale().LED.NOTIFY.ERROR,  'danger');
-        });
-    }
-
-    $scope.delete = function (id) {
-        if (confirm(locale().COMMON.DELETE)) {
-            $http.delete(`${URL}/api/led/${id}`).then(function successCallback(response) {
-                $scope.list();
-                notify(locale().LED.NOTIFY.DELETE.SUCCESS);
-            }, function errorCallback(response) {
-                notify(locale().LED.NOTIFY.ERROR, 'danger');
-            });
-        }
-    }
-
-    $scope.changeform = function (opts = {}) {
-        $scope.params = { color: [], led: [], num: [], time: false };
-        let params = $scope.listBaseAnims.find(x => x.name == $scope.base).params;
-        for (let i = 1; i <= params.color; i++) {
-            $scope.params.color.push({ id: i, model: opts['color' + i] || '' });
-        }
-        for (let i = 1; i <= params.led; i++) {
-            $scope.params.led.push({ id: i, model: opts['led' + i]?.toString() || '' });
-        }
-        for (let i = 1; i <= (params.num || 0); i++) {
-            $scope.params.num.push({ id: i, model: opts['num' + i] });
-        }
-        $scope.params.time = !!params.time;
-        if ($scope.params.time) {
-            $scope.time = opts.time || 0;
-        }
-    }
-
-    $scope.loadForm = function () {
-        $scope.opts = {};
-        for (let i = 0; i < $scope.params.color.length; i++) {
-            $scope.opts['color' + $scope.params.color[i].id] = $scope.params.color[i].model;
-        }
-        for (let i = 0; i < $scope.params.led.length; i++) {
-            $scope.opts['led' + $scope.params.led[i].id] = parseInt($scope.params.led[i].model);
-        }
-        for (let i = 0; i < $scope.params.num.length; i++) {
-            $scope.opts['num' + $scope.params.num[i].id] = $scope.params.num[i].model;
-        }
-        $scope.opts['time'] = $scope.time;
-    }
-
-    $scope.clear = function () {
-        Object.assign($scope, { nombre: '', icon: true, accion: locale().COMMON.ADD });
-        $('#myModal').modal('hide');
-        $scope.list();
-    }
-
-    $scope.dataTable = function (way = 0) {
-        let obj = dataTable($scope, way, 'nombre', 'base');
-        Object.assign($scope, obj);
-    }
-
     $scope.list();
-    $scope.baseAnims();
 }]);
+
+function deleteLed(id) {
+    fetch(`${URL}/api/led/${id}`, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json',
+        }
+    }).then((response) => response.json())
+        .then((data) => {
+            notify(locale().LED.NOTIFY.DELETE.SUCCESS);
+        })
+        .catch((error) => {
+            notify(locale().LED.NOTIFY.ERROR, 'danger');
+        });
+    $('#listadoLeds').bootstrapTable('refresh');
+}

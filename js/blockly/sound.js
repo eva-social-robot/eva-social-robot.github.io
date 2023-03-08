@@ -1,12 +1,7 @@
 var dataSound = [["option", "OPTIONNAME"]];
 var sound = new Promise((resolve, reject) => {
   if (sessionStorage.getItem("currentUser")) {
-    fetch(`${URL}/api/audio`,
-      {
-        headers: {
-          'Authorization': 'Bearer ' + JSON.parse(sessionStorage.getItem("currentUser")).token
-        }
-      })
+    fetch(`${URL}/api/audio`)
       .then(response => response.json())
       .then(data => {
         dataSound = [];

@@ -1,12 +1,7 @@
 var dataLed = [["option", "OPTIONNAME"]];
 var led = new Promise((resolve, reject) => {
   if (sessionStorage.getItem("currentUser")) {
-    fetch(`${URL}/api/led`,
-      {
-        headers: {
-          'Authorization': 'Bearer ' + JSON.parse(sessionStorage.getItem("currentUser")).token
-        }
-      })
+    fetch(`${URL}/api/led`)
       .then(response => response.json())
       .then(data => {
         dataLed = [];

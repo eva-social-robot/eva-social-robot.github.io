@@ -1,12 +1,7 @@
 var dataScript = [["option", "OPTIONNAME"]];
 var script = new Promise((resolve, reject) => {
   if (sessionStorage.getItem("currentUser")) {
-    fetch(`${URL}/api/script`,
-      {
-        headers: {
-          'Authorization': 'Bearer ' + JSON.parse(sessionStorage.getItem("currentUser")).token
-        }
-      })
+    fetch(`${URL}/api/script`)
       .then(response => response.json())
       .then(data => {
         dataScript = [];

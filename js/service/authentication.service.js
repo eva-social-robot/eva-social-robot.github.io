@@ -12,7 +12,7 @@ eva.factory('AuthenticationService', ['$http', function ($http) {
         .then(function successCallback(response) {
             if (response.data) {
                 sessionStorage.setItem("currentUser", JSON.stringify({ ...response.data, username: username }));
-                $http.defaults.headers.common.Authorization = 'Bearer ' + response.data.value;
+                //$http.defaults.headers.common.Authorization = 'Bearer ' + response.data.value;
                 callback(true);
             } else {
                 callback(false);
