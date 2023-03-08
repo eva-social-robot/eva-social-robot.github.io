@@ -5,10 +5,10 @@
                 style="top: 50px !important; background-color: white;">
                 <h1 class="h2">{{'LEDEDITOR.TITLE' | translate}}</h1>
                 <div class="btn-toolbar mb-2 mb-md-0">
-                    <button class="btn btn-sm btn-outline-secondary" onclick="save()"><i
+                    <button class="btn btn-sm btn-outline-secondary" ng-show="loggedIn" onclick="save()"><i
                             class="fa-solid fa-floppy-disk"></i></button>
                     &nbsp;
-                    <button class="btn btn-sm btn-outline-secondary" onclick="saveForceNew()"><i
+                    <button class="btn btn-sm btn-outline-secondary" ng-show="loggedIn" onclick="saveForceNew()"><i
                             class="fa-solid fa-file-circle-plus"></i></button>
                     &nbsp;
                     <button class="btn btn-sm btn-outline-secondary" onclick="executeEmulator()"><i

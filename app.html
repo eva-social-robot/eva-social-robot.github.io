@@ -53,14 +53,14 @@
 
                     </ul>
                 </li>
-                <li class="nav-item dropdown" ng-show="loggedIn" ng-class="{'active': $route.current.activetab == 'led'}">
+                <li class="nav-item dropdown" ng-class="{'active': $route.current.activetab == 'led'}">
                     <a id="drop2" href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button"
                         aria-haspopup="true" aria-expanded="false" target="_blank">
                         {{'TOOLBAR.LED' | translate}}
                         <span class="caret"></span>
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="drop2">
-                        <li><a class="dropdown-item" href="/app.html#!/led">{{'TOOLBAR.LED' | translate}}</a></li>
+                        <li ng-show="loggedIn"><a class="dropdown-item" href="/app.html#!/led">{{'TOOLBAR.LED' | translate}}</a></li>
                         <li><a class="dropdown-item" href="/app.html#!/lededitor">{{'TOOLBAR.EDITOR' | translate}}</a></li>
                     </ul>
                 </li>
@@ -68,7 +68,7 @@
                 <li class="nav-item" ng-show="loggedIn" ng-class="{'active': $route.current.activetab == 'mov'}">
                     <a class="nav-link" href="/app.html#!/mov">{{'TOOLBAR.MOVEMENT' | translate}}</a>
                 </li>
-                <li class="nav-item" ng-show="loggedIn" ng-class="{'active': $route.current.activetab == 'woo'}">
+                <li class="nav-item" ng-class="{'active': $route.current.activetab == 'woo'}">
                     <a class="nav-link" href="/app.html#!/woo">{{'TOOLBAR.WOO' | translate}}</a>
                 </li>
                 <li class="nav-item dropdown">
