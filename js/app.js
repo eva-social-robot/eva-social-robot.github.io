@@ -28,6 +28,12 @@ eva.controller("menu", function ($scope, $rootScope, $translate, $http, $locatio
     $translate.use(key);
   };
 
+  $scope.login = function () {
+      sessionStorage.removeItem("currentUser");
+      $rootScope.loggedIn = false;
+      $location.path('/login');
+  }
+
   $scope.init = function () {
     if (!!sessionStorage.getItem("currentUser")) {
       let token = JSON.parse(sessionStorage.getItem("currentUser")).token;
